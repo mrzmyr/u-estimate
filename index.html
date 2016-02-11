@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html ng-app="app">
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <meta name="google-site-verification" content="czuIAXnQIiREUmmlm134BOs8vvrQEhirczIm2Vh5baU" />
+    <title>uEstimate</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvOsK2GtSA9oPW_nxCw1HIyGc8UuYSeVM&libraries=places"></script>
+    <script src="https://code.angularjs.org/1.3.8/angular.min.js"></script>
+    <script src="js/app.js"></script>
+  </head>
+  <body ng-controller="appCtrl as app">
+    <div class="panel-container" ng-init="app.req = { startAddress: '144 Harris Street, Pyrmont, New South Wales, Australia', endAddress: '52 Regent St, Chippendale, New South Wales, Australia' }">
+      <div class="panel">
+        <h2>uEstimate <span class="text-muted">(Uber Estimation)</span></h2>
+        <form name="estimationForm" ng-submit="app.estimate()">
+          <input type="text" id="start" ng-model="app.req.startAddress" placeholder="Start Location" google-maps-autocomplete>
+          <input type="text" id="end" ng-model="app.req.endAddress" placeholder="Destination Location" google-maps-autocomplete>
+          <input type="radio" name="type" ng-model="app.req.productType" ng-value="product.product_id" ng-repeat="products in app.products">
+          <input type="submit" value="Get Estimation">
+        </form>
+      </div>
+      <div class="panel no-padding" ng-show="app.estimation">
+        <div class="estimation-addresses">
+            <div class="estimation-address" ng-bind="app.req.startAddress"></div>
+            <div class="estimation-address" ng-bind="app.req.endAddress"></div>
+        </div>
+      </div>
+      <div ng-show="app.estimation" class="panel">
+        <div class="error" ng-if="app.error">
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="18px" height="18px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path id="error-2-icon" d="M341.328,50H170.672L50,170.672v170.656L170.672,462h170.656L462,341.328V170.672L341.328,50z M256,398.999c-16.407,0-29.708-13.302-29.708-29.708c0-16.408,13.301-29.708,29.708-29.708s29.708,13.3,29.708,29.708 C285.708,385.697,272.407,398.999,256,398.999z M275.5,308.791h-39l-20-184.999h79L275.5,308.791z" fill="red"/>
+          </svg>
+          {{ app.error }}
+        </div>
+
+        <div class="loading">
+          <img ng-show="!app.estimation.prices && !app.error" src="img/loading.gif" alt="Loading...">
+        </div>
+        <!--
+        <h3>Times</h3>
+        <div ng-repeat="time in app.estimation.times">{{ time.localized_display_name }} {{ time.estimate / 60 | number:0 }} min</div>
+        -->
+        <div
+          ng-show="app.estimation.prices"
+          class="estimation-price__item"
+          ng-class="price.display_name | lowercase"
+          ng-repeat="price in app.estimation.prices track by price.product_id"
+          ng-if="price.high_estimate"
+        >
+          <div class="estimation-price__item-number">
+            {{ price.high_estimate * price.surge_multiplier }} {{ price.currency_code }}
+          </div>
+          <div class="estimation-price__item-label" ng-bind="price.localized_display_name"></div>
+        </div>
+      </div>
+    </div>
+    <div google-map id="map-canvas" latitude="41.850033" longitude="-87.6500523"></div>
+    <div class="made-by">Made by <a target="_blank" href="http://twitter.com/mrzmyr">@mrzmyr</a></div>
+  </body>
+</html>

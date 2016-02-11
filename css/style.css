@@ -1,0 +1,146 @@
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html, body, #map-canvas {
+  -webkit-font-smoothing: antialiased;
+  font-family: 'Helvetica Neue', 'Helvetica';
+  font-size: 14px;
+
+  height: 100%;
+  margin: 0px;
+  padding: 0px
+}
+
+svg {
+  vertical-align: middle;
+}
+
+.loading {
+  text-align: center;
+}
+
+.text-muted {
+  color: #999;
+}
+
+#map-canvas {
+  width: 100%;
+  height: 100%;
+}
+
+.panel-container {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  z-index: 5;
+  padding: 10px;
+  width: 400px;
+}
+
+.panel {
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  background-color: #FFF;
+  border-radius: 3px;
+}
+
+.no-padding {
+  padding: 0;
+}
+
+.panel + .panel {
+  margin-top: 10px;
+}
+
+.panel > h1,
+.panel > h2,
+.panel > h3 {
+  margin-top: 0;
+}
+
+input[type="text"] {
+  display: block;
+  width: 100%;
+  padding: 5px;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+input[type="submit"] {
+  -webkit-font-smoothing: antialiased;
+  width: 100%;
+  display: block;
+  padding: 10px;
+  background-color: #070716;
+  color: #FFF;
+  border: 0;
+  font-size: 16px;
+  border-radius: 2px;
+}
+
+.estimation-addresses {
+  padding-left: 20px;
+}
+
+.estimation-address {
+  padding: 10px 10px 10px 20px;
+  position: relative;
+}
+
+.estimation-address:first-child {
+  border-left: 1px solid green;
+  border-bottom: 1px solid #EEE;
+}
+
+.estimation-address:last-child:before {
+  background: #070716 url('../img/UBER_API_Button_Cars_1x_32x15px.png') 50% center no-repeat;
+  background-size: 16px 7.5px;
+  top: -10px;
+  left: -10px;
+  content: '';
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  z-index: 5;
+  border-radius: 50%;
+}
+
+.estimation-address:last-child {
+  border-left: 1px solid red;
+}
+
+.estimation-price__item {
+  background-color: #070716;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  display: inline-block;
+  text-align: center;
+  color: #FFF;
+  width: 100px;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.uberx,
+.uberpop {
+  background-color: #1FBAD6;
+}
+
+.estimation-price__item-number {
+  font-size: 30px;
+}
+
+.made-by {
+  position: absolute;
+  right: 10px;
+  bottom: 0;
+  background: #FFF;
+  padding: 10px;
+  font-size: 12px;
+  color: #666;
+  border-radius: 3px 3px 0 0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
